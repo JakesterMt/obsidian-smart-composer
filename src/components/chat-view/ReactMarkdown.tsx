@@ -13,10 +13,12 @@ function ReactMarkdown({
   onApply,
   isApplying,
   children,
+  conversationId,
 }: {
   onApply: (blockToApply: string) => void
   children: string
   isApplying: boolean
+  conversationId: string
 }) {
   const blocks: ParsedSmtcmpBlock[] = useMemo(
     () => parsesmtcmpBlocks(children),
@@ -44,6 +46,7 @@ function ReactMarkdown({
             isApplying={isApplying}
             language={block.language}
             filename={block.filename}
+            conversationId={conversationId}
           >
             {block.content}
           </MarkdownCodeComponent>

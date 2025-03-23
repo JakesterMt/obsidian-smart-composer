@@ -2,7 +2,60 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: calc(var(--size-4-1) * -1);
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.smtcmp-chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.smtcmp-chat-header-title {
+  font-size: 20px;
+  margin: 0;
+  flex-grow: 0;
+}
+
+.smtcmp-chat-header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Mode Toggle Button (Chat/Document) */
+.smtcmp-mode-toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  margin-left: 12px;
+  font-weight: 500;
+}
+
+.smtcmp-mode-toggle-button:hover {
+  opacity: 0.9;
+}
+
+.smtcmp-mode-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide old/unused selectors */
+.smtcmp-mode-toggle,
+.smtcmp-document-mode-toggle,
+.smtcmp-chat-header .smtcmp-mode-toggle {
+  display: none;
 }
 
 .smtcmp-chat-header-title {

@@ -6,6 +6,7 @@ import { useSettings } from '../../../contexts/settings-context'
 import { ObsidianDropdown } from '../../common/ObsidianDropdown'
 import { ObsidianSetting } from '../../common/ObsidianSetting'
 import { ObsidianTextArea } from '../../common/ObsidianTextArea'
+import { ObsidianTextInput } from '../../common/ObsidianTextInput'
 
 export function ChatSection() {
   const { settings, setSettings } = useSettings()
@@ -55,6 +56,22 @@ export function ChatSection() {
             await setSettings({
               ...settings,
               applyModelId: value,
+            })
+          }}
+        />
+      </ObsidianSetting>
+
+      <ObsidianSetting
+        name="Save conversation folder path"
+        desc="Specify the folder path where chat conversations will be saved and imported from (e.g., 'Chats' or 'Chats/AI')"
+      >
+        <ObsidianTextInput
+          value={settings.saveConversationFolderPath}
+          placeholder="Chats"
+          onChange={async (value: string) => {
+            await setSettings({
+              ...settings,
+              saveConversationFolderPath: value,
             })
           }}
         />

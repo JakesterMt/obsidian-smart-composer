@@ -33,6 +33,15 @@ export const GROQ_PRICES: Record<string, ModelPricing> = {
   'llama-3.1-8b-instant': { input: 0.05, output: 0.08 },
 }
 
+export const PERPLEXITY_PRICES: Record<string, ModelPricing> = {
+  'sonar-deep-research': { input: 2.0, output: 8.0 },
+  'sonar-reasoning-pro': { input: 2.0, output: 8.0 },
+  'sonar-reasoning': { input: 1.0, output: 5.0 },
+  'sonar-pro': { input: 3.0, output: 15.0 },
+  'sonar': { input: 1.0, output: 1.0 },
+  'r1-1776': { input: 2.0, output: 8.0 },
+}
+
 export const PGLITE_DB_PATH = '.smtcmp_vector_db.tar.gz'
 
 export const PROVIDER_TYPES_INFO = {
@@ -148,6 +157,14 @@ export const PROVIDER_TYPES_INFO = {
       },
     ],
   },
+  perplexity: {
+    label: 'Perplexity',
+    defaultProviderId: 'perplexity',
+    requireApiKey: true,
+    requireBaseUrl: false,
+    supportEmbedding: false,
+    additionalSettings: [],
+  },
 } as const satisfies Record<
   LLMProviderType,
   {
@@ -208,6 +225,10 @@ export const DEFAULT_PROVIDERS: readonly LLMProvider[] = [
   {
     type: 'morph',
     id: PROVIDER_TYPES_INFO.morph.defaultProviderId,
+  },
+  {
+    type: 'perplexity',
+    id: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
   },
 ]
 
@@ -301,6 +322,42 @@ export const DEFAULT_CHAT_MODELS: readonly ChatModel[] = [
     providerId: PROVIDER_TYPES_INFO.morph.defaultProviderId,
     id: 'morph-v0',
     model: 'morph-v0',
+  },
+  {
+    providerType: 'perplexity',
+    providerId: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
+    id: 'sonar-deep-research',
+    model: 'sonar-deep-research',
+  },
+  {
+    providerType: 'perplexity',
+    providerId: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
+    id: 'sonar-reasoning-pro',
+    model: 'sonar-reasoning-pro',
+  },
+  {
+    providerType: 'perplexity',
+    providerId: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
+    id: 'sonar-reasoning',
+    model: 'sonar-reasoning',
+  },
+  {
+    providerType: 'perplexity',
+    providerId: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
+    id: 'sonar-pro',
+    model: 'sonar-pro',
+  },
+  {
+    providerType: 'perplexity',
+    providerId: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
+    id: 'sonar',
+    model: 'sonar',
+  },
+  {
+    providerType: 'perplexity',
+    providerId: PROVIDER_TYPES_INFO.perplexity.defaultProviderId,
+    id: 'r1-1776',
+    model: 'r1-1776',
   },
 ]
 

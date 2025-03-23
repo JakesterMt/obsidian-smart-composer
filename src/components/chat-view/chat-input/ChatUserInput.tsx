@@ -12,6 +12,7 @@ import {
 
 import { useApp } from '../../../contexts/app-context'
 import { useDarkModeContext } from '../../../contexts/dark-mode-context'
+import { useSettings } from '../../../contexts/settings-context'
 import {
   Mentionable,
   MentionableImage,
@@ -26,6 +27,7 @@ import {
 import { openMarkdownFile, readTFileContent } from '../../../utils/obsidian'
 import { MemoizedSyntaxHighlighterWrapper } from '../SyntaxHighlighterWrapper'
 
+import { DocumentModeToggle } from './DocumentModeToggle'
 import { ImageUploadButton } from './ImageUploadButton'
 import LexicalContentEditable from './LexicalContentEditable'
 import MentionableBadge from './MentionableBadge'
@@ -65,6 +67,7 @@ const ChatUserInput = forwardRef<ChatUserInputRef, ChatUserInputProps>(
     ref,
   ) => {
     const app = useApp()
+    const { settings, setSettings } = useSettings()
 
     const editorRef = useRef<LexicalEditor | null>(null)
     const contentEditableRef = useRef<HTMLDivElement>(null)
@@ -201,7 +204,11 @@ const ChatUserInput = forwardRef<ChatUserInputRef, ChatUserInputProps>(
     }
 
     return (
-      <div className="smtcmp-chat-user-input-container" ref={containerRef}>
+      <div
+        className="smtcmp-chat-user-input-container"
+        ref={containerRef}
+        data-has-editor-focus={null}
+      >
         {mentionables.length > 0 && (
           <div className="smtcmp-chat-user-input-files">
             {mentionables.map((m) => (

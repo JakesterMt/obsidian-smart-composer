@@ -18,7 +18,7 @@ const ragOptionsSchema = z.object({
   includePatterns: z.array(z.string()).catch([]),
 })
 
-export const SETTINGS_SCHEMA_VERSION = 4
+export const SETTINGS_SCHEMA_VERSION = 5
 
 /**
  * Settings
@@ -48,6 +48,9 @@ export const smartComposerSettingsSchema = z.object({
   // System Prompt
   systemPrompt: z.string().catch(''),
 
+  // Document Mode
+  documentMode: z.boolean().catch(false), // toggle for document creation mode
+
   // RAG Options
   ragOptions: ragOptionsSchema.catch({
     chunkSize: 1000,
@@ -57,7 +60,14 @@ export const smartComposerSettingsSchema = z.object({
     excludePatterns: [],
     includePatterns: [],
   }),
+  
+  // Save Conversation Folder Path
+  saveConversationFolderPath: z.string().catch('Chats'),
+  
+  // New Document Folder Path
+  newDocumentFolderPath: z.string().catch(''),
 })
+
 export type SmartComposerSettings = z.infer<typeof smartComposerSettingsSchema>
 
 export type SettingMigration = {

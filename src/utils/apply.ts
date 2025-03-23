@@ -19,10 +19,12 @@ You will receive:
 <!-- ... existing content ... -->
 {{ edit_2 }}
 <!-- ... existing content ... -->
+
+Topics: documentation, editing, changes
 </smtcmp_block>
 3. A single, specific markdown block extracted from the conversation history. This block contains the exact changes that should be applied to the target file.
 
-Please rewrite the entire markdown file with ONLY the changes from the specified markdown block applied. DO NOT apply changes suggested by other parts of the conversation. Preserve all parts of the original file that are not related to the changes. Output only the file content, without any additional words or explanations.`
+Please rewrite the entire markdown file with ONLY the changes from the specified markdown block applied. DO NOT apply changes suggested by other parts of the conversation. Preserve all parts of the original file that are not related to the changes. If the markdown block includes a "Topics:" line, extract those tags and add them to the YAML frontmatter of the file. If the file already has a "tags:" field in its frontmatter, append the new tags to the existing ones without duplicates. Output only the file content, without any additional words or explanations.`
 
 const parseUserMessageForApply = (message: ChatUserMessage): string => {
   // Exclude file contents for apply prompts
@@ -53,6 +55,12 @@ const generateApplyPrompt = (
   currentFileContent: string,
   chatMessages: ChatMessage[],
 ) => {
+  // Extract tags from the block to apply
+  const topicsMatch = blockToApply.match(/Topics:\s*(.*?)(?:\n|$)/i);
+  const tagsInstruction = topicsMatch 
+    ? `\n\nNote: The markdown block includes the following tags: ${topicsMatch[1]}. Please add these to the YAML frontmatter of the file.` 
+    : '';
+
   return `# Inputs
 
 ## Target File
@@ -76,6 +84,7 @@ ${chatMessages
 Here is the markdown block that indicates where content changes should be applied.
 <smtcmp_block>
 ${blockToApply}
+${tagsInstruction}
 </smtcmp_block>
 
 Now rewrite the entire file with the changes applied. Immediately start your response with \`\`\`${currentFile.path}`

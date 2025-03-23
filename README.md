@@ -57,6 +57,15 @@ Now, you can **add website links and images** as additional context for your que
 - Hit `Cmd+Shift+Enter` to run Vault Search answer
 - Semantic search across your vault to find the most relevant context
 
+### Chat Management
+
+> **Save, import, and manage your conversations** for better organization and continuity.
+
+- **Save Conversations**: Export your chats as markdown files with proper formatting and metadata
+- **Import Conversations**: Continue previous conversations by importing saved chat files
+- **Chat History**: Access your recent conversations with a single click
+- **Document References**: All referenced documents are preserved in saved conversations
+
 #### Additional Features
 
 - **Custom Model Selection**: Use your own model by setting your API Key (stored locally). Supported providers:

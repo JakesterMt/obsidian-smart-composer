@@ -6,6 +6,7 @@ import { ConfirmModal } from '../../../settings/ConfirmModal'
 import { smartComposerSettingsSchema } from '../../../settings/schema/setting.types'
 import { ObsidianButton } from '../../common/ObsidianButton'
 import { ObsidianSetting } from '../../common/ObsidianSetting'
+import { ObsidianTextInput } from '../../common/ObsidianTextInput'
 
 type EtcSectionProps = {
   app: App
@@ -13,7 +14,7 @@ type EtcSectionProps = {
 }
 
 export function EtcSection({ app }: EtcSectionProps) {
-  const { setSettings } = useSettings()
+  const { settings, setSettings } = useSettings()
 
   const handleResetSettings = () => {
     new ConfirmModal(
@@ -31,6 +32,18 @@ export function EtcSection({ app }: EtcSectionProps) {
   return (
     <div className="smtcmp-settings-section">
       <div className="smtcmp-settings-header">Etc</div>
+
+      <ObsidianSetting
+        name="New Document Folder"
+        desc="Default folder path for new documents created from chat (e.g., 'AI Documents'). Leave empty to use the current file's folder."
+      >
+        <ObsidianTextInput
+          value={settings.newDocumentFolderPath}
+          onChange={(value) =>
+            setSettings({ ...settings, newDocumentFolderPath: value })
+          }
+        />
+      </ObsidianSetting>
 
       <ObsidianSetting
         name="Reset settings"

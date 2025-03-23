@@ -11,7 +11,7 @@ import {
   LLMBaseUrlNotSetException,
   LLMRateLimitExceededException,
 } from '../../../core/llm/exception'
-import { InsertEmbedding, SelectEmbedding } from '../../../database/schema'
+import { InsertEmbedding, SelectEmbedding } from '../../schema'
 import { ReportBugModal } from '../../../settings/ReportBugModal'
 import {
   EmbeddingDbStats,

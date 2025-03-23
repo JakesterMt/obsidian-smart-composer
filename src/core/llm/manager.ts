@@ -14,6 +14,7 @@ import { OllamaProvider } from './ollama'
 import { OpenAIAuthenticatedProvider } from './openai'
 import { OpenAICompatibleProvider } from './openaiCompatibleProvider'
 import { OpenRouterProvider } from './openRouterProvider'
+import { PerplexityProvider } from './perplexity'
 
 /*
  * OpenAI, OpenAI-compatible, and Anthropic providers include token usage statistics
@@ -60,6 +61,9 @@ export function getProviderClient({
     }
     case 'morph': {
       return new MorphProvider(provider)
+    }
+    case 'perplexity': {
+      return new PerplexityProvider(provider)
     }
     case 'azure-openai': {
       return new AzureOpenAIProvider(provider)

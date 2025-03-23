@@ -122,3 +122,33 @@ export function openMarkdownFile(
     })
   }
 }
+
+/**
+ * Gets the appropriate folder path for a new document
+ * Uses the specified folder path if provided, otherwise uses the active file's folder
+ */
+export function getNewDocumentFolderPath(
+  app: App,
+  settingsFolderPath?: string
+): string {
+  // If a folder path is specified in settings and it's not empty, use it
+  if (settingsFolderPath && settingsFolderPath.trim() !== '') {
+    // Ensure the path ends with a slash
+    return settingsFolderPath.endsWith('/') 
+      ? settingsFolderPath 
+      : `${settingsFolderPath}/`;
+  }
+  
+  // Otherwise, use the active file's folder or default to root
+  let folderPath = '';
+  const activeFile = app.workspace.getActiveFile();
+  if (activeFile) {
+    // Get parent folder path from active file
+    const pathParts = activeFile.path.split('/');
+    pathParts.pop(); // Remove the filename
+    folderPath = pathParts.join('/');
+    if (folderPath) folderPath += '/';
+  }
+  
+  return folderPath;
+}
